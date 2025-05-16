@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # TaskCollab - Collaborative Task Manager
 
 A collaborative task management application that allows multiple users to create, manage, and track tasks together.
@@ -67,3 +68,7 @@ A collaborative task management application that allows multiple users to create
 - Task categories and priorities
 - Due dates and reminders
 - Team/project grouping for tasks
+=======
+# azure-fullstack-app
+Projet de déploiement de page web full stack via Azure
+>>>>>>> b395cac012cd0f9a3d5650fd618e61bfee8a186a
