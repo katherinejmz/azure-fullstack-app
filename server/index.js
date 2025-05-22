@@ -13,7 +13,9 @@ const __dirname = dirname(__filename);
 
 // Initialize express app
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Server running on port ${port}`));
+
 
 // Middleware
 app.use(cors());
