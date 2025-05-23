@@ -1,74 +1,98 @@
-<<<<<<< HEAD
-# TaskCollab - Collaborative Task Manager
+# TaskCollab - Azure Fullstack Deployment
 
-A collaborative task management application that allows multiple users to create, manage, and track tasks together.
+TaskCollab est une application collaborative de gestion de tâches, permettant à plusieurs utilisateurs de créer, gérer et suivre des tâches ensemble. Ce dépôt contient à la fois l’application (frontend + backend) et sa configuration pour un déploiement complet sur **Microsoft Azure**.
 
-## Features
+## 🚀 Objectif du Projet
 
-- Simple user authentication with pseudonyms
-- Create tasks with title and description
-- View all tasks from all users
-- Mark tasks as complete or incomplete
-- Filter tasks by ownership and completion status
-- Responsive design for all devices
+- Déployer une application fullstack sur Azure (frontend, backend et base de données).
+- Mettre en œuvre une architecture cloud fiable, évolutive et sécurisée.
+- Assurer une communication fluide entre les composants.
+- Bonus : Intégrer CI/CD, sécurisation avec Azure Key Vault, etc.
 
-## Tech Stack
+---
 
-- **Frontend**: React, TypeScript, TailwindCSS
-- **Backend**: Node.js, Express
-- **Database**: SQLite (via better-sqlite3)
-- **State Management**: Zustand
-- **Routing**: React Router
-- **Form Handling**: React Hook Form
-- **Notifications**: Sonner
+## ✨ Fonctionnalités principales
 
-## Running the Application
+- Authentification simple via pseudonymes
+- Création, modification et suppression de tâches
+- Visualisation et filtrage des tâches (par utilisateur ou statut)
+- Design responsive
 
-1. Install dependencies:
-   ```
-   npm install
-   ```
+---
 
-2. Start both frontend and backend in development mode:
-   ```
-   npm run dev:full
-   ```
+## 🛠️ Stack Technique
 
-3. The application will be available at:
-   - Frontend: http://localhost:5173
-   - Backend API: http://localhost:3001
+| Composant   | Technologie utilisée                      |
+|-------------|--------------------------------------------|
+| Frontend    | React, Vite, TypeScript, TailwindCSS       |
+| Backend     | Node.js, Express                           |
+| Base de données | SQLite (via better-sqlite3)            |
+| État global | Zustand                                    |
+| Formulaires | React Hook Form                            |
+| Notifications | Sonner                                  |
+| Routing     | React Router                               |
+| CI/CD       | GitHub Actions                             |
 
-## API Routes
+---
 
-- `POST /api/auth/register` - Register a new user
-- `POST /api/auth/login` - Login with a username
-- `GET /api/tasks` - Get all tasks
-- `GET /api/tasks/my-tasks` - Get current user's tasks
-- `GET /api/tasks/:id` - Get a specific task
-- `POST /api/tasks` - Create a new task
-- `PUT /api/tasks/:id` - Update a task
-- `DELETE /api/tasks/:id` - Delete a task
+## 🧩 Architecture de Déploiement sur Azure
 
-## Project Structure
+| Élément          | Ressource Azure                          |
+|------------------|------------------------------------------|
+| Frontend         | Azure App Service (Web App)              |
+| Backend API      | Azure App Service (API App)              |
+| Base de données  | Azure SQL Database ou Cosmos DB          |
+| Pipeline CI/CD   | GitHub Actions                           |
+| Secrets & sécurité | Azure Key Vault                       |
 
-- `/src` - Frontend React application
-  - `/components` - Reusable UI components
-  - `/pages` - Page components
-  - `/store` - Zustand state management
-  - `/types` - TypeScript type definitions
-- `/server` - Backend Express API
-  - `/db` - Database operations
-  - `/routes` - API route handlers
-  - `/middlewares` - Express middleware
+---
 
-## Future Improvements
+## 🌐 Accès à l'application
 
-- Real-time updates with WebSockets
-- User avatars and profiles
-- Task categories and priorities
-- Due dates and reminders
-- Team/project grouping for tasks
-=======
-# azure-fullstack-app
-Projet de déploiement de page web full stack via Azure
->>>>>>> b395cac012cd0f9a3d5650fd618e61bfee8a186a
+- **Frontend déployé** : [https://mon-app.azurewebsites.net](https://mon-app.azurewebsites.net)
+- **API backend** : [https://mon-api.azurewebsites.net](https://mon-api.azurewebsites.net)
+
+---
+
+## 🔄 CI/CD GitHub Actions
+
+Le pipeline est déclenché à chaque push sur `main`. Il :
+
+1. Installe les dépendances
+2. Build le frontend
+3. Déploie sur Azure App Services
+
+```yaml
+# Exemple simplifié
+name: Deploy to Azure
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./server
+
+      - name: Build Frontend
+        run: npm run build
+        working-directory: ./client
+
+      - name: Deploy Frontend
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'taskcollab-frontend'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: ./client/dist
