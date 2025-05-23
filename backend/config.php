@@ -1,9 +1,10 @@
 <?php
 
-$host = 'mysql-backend-php-snk.mysql.database.azure.com';
-$dbname = 'app_db';
-$user = 'katherine@mysql-backend-php-snk';
-$pass = getenv('DB_PASSWORD'); // variable d'environnement
+$host = getenv('DB_HOST');
+$dbname = getenv('DB_NAME');
+$user = getenv('DB_USER');
+$pass = getenv('DB_PASSWORD');
+
 
 try {
     $conn = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
